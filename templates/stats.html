@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Directory datas</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+    <div class="jumbotron text-center">
+        <h1>Directory datas</h1>
+    </div>
+    
+    <div class="container">
+        <p>Here are the datas for the directory {{ datas.root }}</p>
+        <p>Files in directory: {{ datas.nb_files }} ( {{ datas.total_nb_files }} with subs)</p>
+        <p>Total Size: {{ datas.total_size }} Kb</p>
+    
+        <table class="table table-striped">
+            <tr>
+                <th>Directory</th>
+                <th>Size</th>
+                <th>---</th>
+            </tr>
+            {% for directory in datas.subdirs %}
+            <tr>
+                <td>{{ directory.name }}</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ directory.percentage }}"
+                         aria-valuemin="0" aria-valuemax="100" style="width: {{ directory.percentage }}%">
+                         {{ directory.percentage }}
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    {{ directory.size }} Kb
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    
+    </div>
+</body>
+</html>
